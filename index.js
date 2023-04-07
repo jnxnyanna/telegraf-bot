@@ -12,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.all("*", (req, res) => res.send("<pre>Hello from zhenni!</pre>"));
 
 bot.on("message", (ctx) => {
     ctx.reply("aloo " + ctx.from.first_name + "!", { reply_to_message_id: ctx.message.message_id });
@@ -23,7 +24,9 @@ if (env == "PRODUCTION") {
         res.status(200).json({ result: true });
     });
 
-    app.listen(port, () => console.log("App was running on port" + port));
+
 } else {
     bot.launch().then(console.log("Bot was running on local"));
 }
+
+app.listen(port, () => console.log("App was running on port" + port));
