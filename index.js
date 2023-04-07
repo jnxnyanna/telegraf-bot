@@ -23,9 +23,8 @@ if (env == "PRODUCTION") {
         res.status(200).json({ result: true });
     });
 
-
+    app.listen(port, () => console.log("App was running on port" + port));
 } else {
     bot.launch().then(console.log("Bot was running on local"));
 }
 
-app.listen(port, () => console.log("App was running on port" + port));
