@@ -19,8 +19,8 @@ bot.on("message", (ctx) => {
 
 if (env == "PRODUCTION") {
     app.post("/mybots", (req, res) => {
-        bot.handleUpdate(req.body);
         res.status(200).json({ result: true });
+        bot.handleUpdate(req.body,res);
     });
 } else {
     bot.launch().then(console.log("Bot was running on local"));
