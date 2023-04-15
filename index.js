@@ -22,12 +22,10 @@ if (env == "PRODUCTION") {
         bot.handleUpdate(req.body, res);
         res.status(200).json({ result: true });
     });
-
-
 } else {
     bot.launch().then(console.log("Bot was running on local"));
 }
 
-
+app.all("*", (req, res) => res.status(200).json({ message: "Hello from zhenni!" }));
 
 app.listen(port, () => console.log("App was running on port" + port));
