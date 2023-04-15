@@ -28,4 +28,4 @@ if (env == "PRODUCTION") {
 
 app.all("*", (req, res) => res.status(200).json({ message: "Hello from zhenni!" }));
 
-app.listen(port, () => console.log("App was running on port" + port));
+app.listen(port, () => console.log("App was running on port " + port));
