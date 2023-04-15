@@ -7,7 +7,6 @@ if (!process.env.BOT_TOKEN) throw "Missing BOT_TOKEN";
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const app = express();
-const env = process.env.NODE_ENV;
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -17,10 +16,10 @@ bot.on("message", (ctx) => {
     ctx.reply("aloo " + ctx.from.first_name + "!", { reply_to_message_id: ctx.message.message_id });
 });
 
-if (env == "PRODUCTION") {
+if (process.env.NODE_ENV && process.env.NODE_ENV == "PRODUCTION") {
     app.post("/mybots", (req, res) => {
-        res.status(200).json({ result: true });
-        bot.handleUpdate(req.body,res);
+        bot.handleUpdate(req.body, res);
+        res.status(200).json(req.body);
     });
 } else {
     bot.launch().then(console.log("Bot was running on local"));
